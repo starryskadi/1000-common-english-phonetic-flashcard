@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1000 Common English Words</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            text-align: center;
+            padding: 1rem;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            margin: 1rem auto;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            background-color: var(--card-background);
+        }
+
+        .card-front {
+            background: var(--card-background);
+        }
+
+        .card-back {
+            background: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-front h2, .card-back h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .controls {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 1.25rem;
+            cursor: pointer;
+            background-color: var(--card-background);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        button:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .progress {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .instructions {
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flashcard">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2 id="word">Loading...</h2>
+                </div>
+                <div class="card-back">
+                    <h2 id="translation"></h2>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="prev" title="Previous">←</button>
+            <button id="random" title="Random">↻</button>
+            <button id="next" title="Next">→</button>
+        </div>
+        <div class="progress">
+            <span id="current">0</span>/<span id="total">0</span>
+        </div>
+        <div class="instructions">
+            Click card to flip
+        </div>
+    </div>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
