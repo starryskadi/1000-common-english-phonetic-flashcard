@@ -48,13 +48,14 @@ effect(() => {
   const { currentIndex, isFlipped } = state;
 
   const currentWord = words[currentIndex].word;
+  const currentPhonetic = words[currentIndex].phonetic;
 
   // Update word
-  wordElement.textContent = currentWord;
-  translationElement.textContent = words[currentIndex].phonetic;
+  wordElement.textContent = currentPhonetic ? currentPhonetic : currentWord;
+  translationElement.textContent = currentWord;
 
   longManLink.href = `https://www.ldoceonline.com/dictionary/${currentWord}`;
-  youglishLink.href = `https://youglish.com/pronounce/${currentWord}/english`;
+  youglishLink.href = `https://youglish.com/pronounce/${currentWord}/english/us`;
 
   // Update progress
   https: currentElement.textContent = currentIndex + 1;
